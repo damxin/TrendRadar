@@ -16,6 +16,13 @@ app:
   timezone: "Asia/Shanghai"
   show_version_update: true           # 显示版本更新提示
 
+  # 网页访问认证配置
+  # 启用后，访问生成的 HTML 报告需要输入用户名和密码
+  auth:
+    enabled: true                       # 是否启用认证
+    username: "admin"                   # 用户名
+    password: "trendradar123"           # 密码（建议修改为强密码）
+
 
 # ===============================================================
 # 2. 数据源 - 热榜平台
