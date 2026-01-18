@@ -26,6 +26,24 @@ uv pip install .
 echo "🔍 [爬虫] 正在获取最新热点新闻..."
 uv run trendradar
 
+# 从 config.yaml 读取认证信息并生成 Token
+AUTH_ENABLED=$(grep -A3 "^  auth:" config/config.yaml | grep "enabled:" | awk '{print $2}' | tr -d '\r')
+AUTH_USERNAME=$(grep -A3 "^  auth:" config/config.yaml | grep "username:" | awk '{print $2}' | tr -d '"' | tr -d '\r')
+AUTH_PASSWORD=$(grep -A3 "^  auth:" config/config.yaml | grep "password:" | awk '{print $2}' | tr -d '"' | tr -d '\r')
+
+# 生成 Bearer Token (base64 编码的 username:password)
+if [ "$AUTH_ENABLED" = "true" ]; then
+    BEARER_TOKEN=$(echo -n "${AUTH_USERNAME}:${AUTH_PASSWORD}" | base64)
+else
+    BEARER_TOKEN=""
+fi
+
+# 获取服务器 IP（优先获取非 localhost 的 IP）
+SERVER_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
+if [ -z "$SERVER_IP" ]; then
+    SERVER_IP="YOUR_SERVER_IP"
+fi
+
 echo ""
 echo "╔══════════════════════════════════════════════════════════╗"
 echo "║              TrendRadar 服务启动中                       ║"
@@ -36,6 +54,46 @@ echo "╠═══════════════════════�
 echo "║  按 Ctrl+C 停止所有服务                                  ║"
 echo "╚══════════════════════════════════════════════════════════╝"
 echo ""
+
+# 打印认证信息和 Cherry Studio 配置
+if [ "$AUTH_ENABLED" = "true" ]; then
+    echo "🔐 [认证信息]"
+    echo "   用户名: $AUTH_USERNAME"
+    echo "   Bearer Token: $BEARER_TOKEN"
+    echo ""
+fi
+
+echo "📋 [Cherry Studio MCP 配置] - 可直接复制粘贴:"
+echo "────────────────────────────────────────────────"
+if [ "$AUTH_ENABLED" = "true" ]; then
+    cat << EOF
+{
+  "TrendRadar": {
+    "name": "TrendRadar",
+    "type": "streamable-http",
+    "url": "http://${SERVER_IP}:13333/mcp",
+    "headers": {
+      "Authorization": "Bearer ${BEARER_TOKEN}"
+    },
+    "isActive": true
+  }
+}
+EOF
+else
+    cat << EOF
+{
+  "TrendRadar": {
+    "name": "TrendRadar",
+    "type": "streamable-http",
+    "url": "http://${SERVER_IP}:13333/mcp",
+    "isActive": true
+  }
+}
+EOF
+fi
+echo "────────────────────────────────────────────────"
+echo ""
+
 
 # 定义清理函数，在脚本退出时终止后台进程
 cleanup() {
@@ -64,3 +122,4 @@ sleep 2
 # 5. 前台启动 Web 服务器 (端口 8080)
 echo "🌐 [Web] 正在启动网页服务..."
 uv run python start_http_server.py 18081
+echo "🌐 [Web] 网页服务已启动"
