@@ -1,6 +1,6 @@
 <div align="center" id="trendradar">
 
-<a href="https://github.com/sansan0/TrendRadar" title="TrendRadar">
+<a href="https://github.com/damxin/TrendRadar" title="TrendRadar">
   <img src="/_image/banner.webp" alt="TrendRadar Banner" width="80%">
 </a>
 
@@ -10,13 +10,13 @@ Deploy in <strong>30 seconds</strong> — Say goodbye to endless scrolling, only
 
 <a href="https://shandianshuo.cn" target="_blank" title="AI Voice Input, 4x Faster Than Typing ⚡"><img src="_image/shandianshuo.png" alt="FlashSpeak logo" height="50"/></a>
 
-[![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/damxin/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/damxin/TrendRadar/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/damxin/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/damxin/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v5.2.0-blue.svg)](https://github.com/sansan0/TrendRadar)
-[![MCP](https://img.shields.io/badge/MCP-v3.1.6-green.svg)](https://github.com/sansan0/TrendRadar)
-[![RSS](https://img.shields.io/badge/RSS-Feed_Support-orange.svg?style=flat-square&logo=rss&logoColor=white)](https://github.com/sansan0/TrendRadar)
-[![AI Translation](https://img.shields.io/badge/AI-Multi--Language-purple.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v5.2.0-blue.svg)](https://github.com/damxin/TrendRadar)
+[![MCP](https://img.shields.io/badge/MCP-v3.1.6-green.svg)](https://github.com/damxin/TrendRadar)
+[![RSS](https://img.shields.io/badge/RSS-Feed_Support-orange.svg?style=flat-square&logo=rss&logoColor=white)](https://github.com/damxin/TrendRadar)
+[![AI Translation](https://img.shields.io/badge/AI-Multi--Language-purple.svg?style=flat-square)](https://github.com/damxin/TrendRadar)
 
 [![WeWork](https://img.shields.io/badge/WeWork-Notification-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
 [![WeChat](https://img.shields.io/badge/WeChat-Notification-00D4AA?style=flat-square)](https://weixin.qq.com/)
@@ -30,7 +30,7 @@ Deploy in <strong>30 seconds</strong> — Say goodbye to endless scrolling, only
 [![Generic Webhook](https://img.shields.io/badge/Generic-Webhook-607D8B?style=flat-square&logo=webhook&logoColor=white)](#)
 
 
-[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automation-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/sansan0/TrendRadar)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automation-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/damxin/TrendRadar)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Deployment-4285F4?style=flat-square&logo=github&logoColor=white)](https://sansan0.github.io/TrendRadar)
 [![Docker](https://img.shields.io/badge/Docker-Deployment-2496ED?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/r/wantcat/trendradar)
 [![MCP Support](https://img.shields.io/badge/MCP-AI_Analysis-FF6B6B?style=flat-square&logo=ai&logoColor=white)](https://modelcontextprotocol.io/)
@@ -170,7 +170,7 @@ After communication, the author indicated no concerns about server pressure, but
 
 ## 📝 Changelog
 
->**📌 Check Latest Updates**: **[Original Repository Changelog](https://github.com/sansan0/TrendRadar?tab=readme-ov-file#-changelog)**:
+>**📌 Check Latest Updates**: **[Original Repository Changelog](https://github.com/damxin/TrendRadar?tab=readme-ov-file#-changelog)**:
 - **Tip**: Check [Changelog] to understand specific [Features]
 
 ### 2026/01/17 - v5.2.0
@@ -444,7 +444,7 @@ This update refactors the push message structure into five distinct core section
 > 📖 **Detailed Configuration Tutorial**: [Quick Start - Bark Push](#-quick-start)
 
 **🐛 Bug Fix**
-- Fixed issue where `ntfy_server_url` in `config.yaml` was ignored ([#345](https://github.com/sansan0/TrendRadar/issues/345))
+- Fixed issue where `ntfy_server_url` in `config.yaml` was ignored ([#345](https://github.com/damxin/TrendRadar/issues/345))
 
 **🔧 Upgrade Instructions**:
 - **GitHub Fork Users**: Update `main.py`, `config/config.yaml`, `.github/workflows/crawler.yml`
@@ -560,7 +560,7 @@ This update refactors the push message structure into five distinct core section
 
 ### 2025/10/10 - v2.4.3
 
-> Thanks to [nidaye996](https://github.com/sansan0/TrendRadar/issues/98) for discovering the UX issue
+> Thanks to [nidaye996](https://github.com/damxin/TrendRadar/issues/98) for discovering the UX issue
 
 - **Updates**:
   - Refactored "Silent Push Mode" naming to "Push Time Window Control", improving feature comprehension
@@ -602,7 +602,7 @@ This update refactors the push message structure into five distinct core section
 
 ### 2025/09/26 - v2.3.2
 
-- Fixed email notification config check being missed ([#88](https://github.com/sansan0/TrendRadar/issues/88))
+- Fixed email notification config check being missed ([#88](https://github.com/damxin/TrendRadar/issues/88))
 
 **Fix Description**:
 - Solved the issue where system still prompted "No webhook configured" even with correct email notification setup
@@ -718,7 +718,7 @@ WeWork and Telegram push messages have length limits, I adopted splitting messag
 ### 2025/06/21 - v1.2.1
 
 Before this version, not only main.py needs copy replacement, crawler.yml also needs you to copy replacement
-https://github.com/sansan0/TrendRadar/blob/master/.github/workflows/crawler.yml
+https://github.com/damxin/TrendRadar/blob/master/.github/workflows/crawler.yml
 
 
 ### 2025/06/19 - v1.2.0
@@ -975,7 +975,7 @@ Transform from "algorithm recommendation captivity" to "actively getting the inf
 
 ## 🚀 Quick Start
 
-> **Reminder**: You should first **[check the latest official documentation](https://github.com/sansan0/TrendRadar?tab=readme-ov-file)** to ensure the configuration steps are up to date.
+> **Reminder**: You should first **[check the latest official documentation](https://github.com/damxin/TrendRadar?tab=readme-ov-file)** to ensure the configuration steps are up to date.
 
 ### Choose the Deployment Method That Fits You
 
@@ -998,7 +998,7 @@ Transform from "algorithm recommendation captivity" to "actively getting the inf
 
    > ⚠️ Note:
    > - Any mention of "Fork" in this document can be understood as "Use this template"
-   > - Using Fork may cause runtime issues, see [Issue #606](https://github.com/sansan0/TrendRadar/issues/606)
+   > - Using Fork may cause runtime issues, see [Issue #606](https://github.com/damxin/TrendRadar/issues/606)
 
    <br>
 
@@ -1088,7 +1088,7 @@ Transform from "algorithm recommendation captivity" to "actively getting the inf
 
 Two methods available, **Method 1** is simpler, **Method 2** is more complex (but stable push)
 
-Method 1 discovered and suggested by **ziventian**, thanks to them. Default is personal push, group push can be configured via [#97](https://github.com/sansan0/TrendRadar/issues/97)
+Method 1 discovered and suggested by **ziventian**, thanks to them. Default is personal push, group push can be configured via [#97](https://github.com/damxin/TrendRadar/issues/97)
 
 **Method 1:**
 
@@ -1289,14 +1289,14 @@ Method 1 discovered and suggested by **ziventian**, thanks to them. Default is p
 > **Auto-detect**: When using above emails, no need to manually configure `EMAIL_SMTP_SERVER` and `EMAIL_SMTP_PORT`, system auto-detects.
 >
 > **Feedback Notice**:
-> - If you successfully test with **other email providers**, please open an [Issue](https://github.com/sansan0/TrendRadar/issues) to let us know, we'll add to support list
-> - If above email configurations are incorrect or unusable, please also open an [Issue](https://github.com/sansan0/TrendRadar/issues) for feedback to help improve the project
+> - If you successfully test with **other email providers**, please open an [Issue](https://github.com/damxin/TrendRadar/issues) to let us know, we'll add to support list
+> - If above email configurations are incorrect or unusable, please also open an [Issue](https://github.com/damxin/TrendRadar/issues) for feedback to help improve the project
 >
 > **Special Thanks**:
-> - Thanks to [@DYZYD](https://github.com/DYZYD) for contributing 189 Mail (189.cn) configuration and completing self-send-receive testing ([#291](https://github.com/sansan0/TrendRadar/issues/291))
-> - Thanks to [@longzhenren](https://github.com/longzhenren) for contributing Aliyun Mail (aliyun.com) configuration and completing testing ([#344](https://github.com/sansan0/TrendRadar/issues/344))
-> - Thanks to [@ACANX](https://github.com/ACANX) for contributing Yandex Mail (yandex.com) configuration and completing testing ([#663](https://github.com/sansan0/TrendRadar/issues/663))
-> - Thanks to [@Sleepy-Tianhao](https://github.com/Sleepy-Tianhao) for contributing iCloud Mail (icloud.com) configuration and completing testing ([#728](https://github.com/sansan0/TrendRadar/issues/728))
+> - Thanks to [@DYZYD](https://github.com/DYZYD) for contributing 189 Mail (189.cn) configuration and completing self-send-receive testing ([#291](https://github.com/damxin/TrendRadar/issues/291))
+> - Thanks to [@longzhenren](https://github.com/longzhenren) for contributing Aliyun Mail (aliyun.com) configuration and completing testing ([#344](https://github.com/damxin/TrendRadar/issues/344))
+> - Thanks to [@ACANX](https://github.com/ACANX) for contributing Yandex Mail (yandex.com) configuration and completing testing ([#663](https://github.com/damxin/TrendRadar/issues/663))
+> - Thanks to [@Sleepy-Tianhao](https://github.com/Sleepy-Tianhao) for contributing iCloud Mail (icloud.com) configuration and completing testing ([#728](https://github.com/damxin/TrendRadar/issues/728))
 
 **Common Email Settings:**
 
@@ -1689,13 +1689,13 @@ Templates support two placeholders:
    - **Method 2**: Direct access `https://github.com/YourUsername/TrendRadar/actions`
 
    **Example comparison**:
-   - ❌ Author's project: `https://github.com/sansan0/TrendRadar/actions`
+   - ❌ Author's project: `https://github.com/damxin/TrendRadar/actions`
    - ✅ Your project: `https://github.com/YourUsername/TrendRadar/actions`
 
    **Testing steps**:
    1. Enter your project's Actions page
    2. Find **"Hot News Crawler"** and click in
-      - If you don't see this text, refer to [#109](https://github.com/sansan0/TrendRadar/issues/109) to solve
+      - If you don't see this text, refer to [#109](https://github.com/damxin/TrendRadar/issues/109) to solve
    3. Click **"Run workflow"** button on the right to run
    4. Wait about 1 minute, messages will be pushed to your configured platform
 
@@ -1867,7 +1867,7 @@ platforms:
     # Add more platforms...
 ```
 
-> 💡 **Shortcut**: If you don't know how to read source code, you can copy from others' organized [Platform Configuration Summary](https://github.com/sansan0/TrendRadar/issues/95)
+> 💡 **Shortcut**: If you don't know how to read source code, you can copy from others' organized [Platform Configuration Summary](https://github.com/damxin/TrendRadar/issues/95)
 
 > ⚠️ **Note**: More platforms is not always better, suggest choosing 10-15 core platforms. Too many platforms will cause information overload and actually reduce user experience.
 
@@ -2459,7 +2459,7 @@ TrendRadar provides two independent Docker images, deploy according to your need
    **Method 1-A: Using git clone (Recommended, Simplest)**
    ```bash
    # Clone project to local
-   git clone https://github.com/sansan0/TrendRadar.git
+   git clone https://github.com/damxin/TrendRadar.git
    cd TrendRadar
    ```
 
@@ -2470,13 +2470,13 @@ TrendRadar provides two independent Docker images, deploy according to your need
    cd trendradar
 
    # Download config file templates
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/config.yaml -P config/
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequency_words.txt -P config/
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/ai_analysis_prompt.txt -P config/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/config.yaml -P config/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/frequency_words.txt -P config/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/ai_analysis_prompt.txt -P config/
 
    # Download docker compose config
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/.env -P docker/
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/docker-compose.yml -P docker/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/.env -P docker/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/docker-compose.yml -P docker/
    ```
 
    > 💡 **Note**: Key directory structure required for Docker deployment:
@@ -2571,7 +2571,7 @@ If you need custom code modifications or build your own image:
 
 ```bash
 # Clone project
-git clone https://github.com/sansan0/TrendRadar.git
+git clone https://github.com/damxin/TrendRadar.git
 cd TrendRadar
 
 # Modify config files
@@ -2758,18 +2758,18 @@ Use docker compose to start both news push and MCP services:
 
 ```bash
 # Method 1: Clone project (Recommended)
-git clone https://github.com/sansan0/TrendRadar.git
+git clone https://github.com/damxin/TrendRadar.git
 cd TrendRadar/docker
 docker compose up -d
 
 # Method 2: Download docker-compose.yml separately
 mkdir trendradar && cd trendradar
-wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/docker-compose.yml
-wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/.env
+wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/docker-compose.yml
+wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/.env
 mkdir -p config output
 # Download config files
-wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/config.yaml -P config/
-wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequency_words.txt -P config/
+wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/config.yaml -P config/
+wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/frequency_words.txt -P config/
 # Modify volume paths in docker-compose.yml: ../config -> ./config, ../output -> ./output
 docker compose up -d
 
@@ -3655,7 +3655,7 @@ Any client supporting Model Context Protocol can connect to TrendRadar:
 - https://github.com/sansan0/bilibili-comment-analyzer
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=sansan0/TrendRadar&type=Date)](https://www.star-history.com/#sansan0/TrendRadar&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=damxin/TrendRadar&type=Date)](https://www.star-history.com/#damxin/TrendRadar&Date)
 
 <br>
 

@@ -1,6 +1,6 @@
 <div align="center" id="trendradar">
 
-<a href="https://github.com/sansan0/TrendRadar" title="TrendRadar">
+<a href="https://github.com/damxin/TrendRadar" title="TrendRadar">
   <img src="/_image/banner.webp" alt="TrendRadar Banner" width="80%">
 </a>
 
@@ -10,13 +10,13 @@
 
 <a href="https://shandianshuo.cn" target="_blank" title="AI 语音输入，比打字快 4 倍 ⚡"><img src="_image/shandianshuo.png" alt="闪电说 logo" height="50"/></a>
 
-[![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/damxin/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/damxin/TrendRadar/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/damxin/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/damxin/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v5.2.0-blue.svg)](https://github.com/sansan0/TrendRadar)
-[![MCP](https://img.shields.io/badge/MCP-v3.1.6-green.svg)](https://github.com/sansan0/TrendRadar)
-[![RSS](https://img.shields.io/badge/RSS-订阅源支持-orange.svg?style=flat-square&logo=rss&logoColor=white)](https://github.com/sansan0/TrendRadar)
-[![AI翻译](https://img.shields.io/badge/AI-多语言推送-purple.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v5.2.0-blue.svg)](https://github.com/damxin/TrendRadar)
+[![MCP](https://img.shields.io/badge/MCP-v3.1.6-green.svg)](https://github.com/damxin/TrendRadar)
+[![RSS](https://img.shields.io/badge/RSS-订阅源支持-orange.svg?style=flat-square&logo=rss&logoColor=white)](https://github.com/damxin/TrendRadar)
+[![AI翻译](https://img.shields.io/badge/AI-多语言推送-purple.svg?style=flat-square)](https://github.com/damxin/TrendRadar)
 
 [![企业微信通知](https://img.shields.io/badge/企业微信-通知-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
 [![个人微信通知](https://img.shields.io/badge/个人微信-通知-00D4AA?style=flat-square)](https://weixin.qq.com/)
@@ -30,7 +30,7 @@
 [![通用Webhook](https://img.shields.io/badge/通用-Webhook-607D8B?style=flat-square&logo=webhook&logoColor=white)](#)
 
 
-[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-自动化-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/sansan0/TrendRadar)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-自动化-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/damxin/TrendRadar)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-部署-4285F4?style=flat-square&logo=github&logoColor=white)](https://sansan0.github.io/TrendRadar)
 [![Docker](https://img.shields.io/badge/Docker-部署-2496ED?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/r/wantcat/trendradar)
 [![MCP Support](https://img.shields.io/badge/MCP-AI分析支持-FF6B6B?style=flat-square&logo=ai&logoColor=white)](https://modelcontextprotocol.io/)
@@ -217,7 +217,7 @@
 
 ## 📝 更新日志
 
-> **📌 查看最新更新**：**[原仓库更新日志](https://github.com/sansan0/TrendRadar?tab=readme-ov-file#-更新日志)** ：
+> **📌 查看最新更新**：**[原仓库更新日志](https://github.com/damxin/TrendRadar?tab=readme-ov-file#-更新日志)** ：
 - **提示**：建议查看【历史更新】，明确具体的【功能内容】
 
 ### 2026/01/17 - v5.2.0
@@ -307,7 +307,7 @@
 
 **🔧 配置优化**
 
-- **频率词配置增强**：新增 `[组别名]` 语法，支持 `#` 注释行，配置更清晰（感谢 [@songge8](https://github.com/sansan0/TrendRadar/issues/752) 提出的建议）
+- **频率词配置增强**：新增 `[组别名]` 语法，支持 `#` 注释行，配置更清晰（感谢 [@songge8](https://github.com/damxin/TrendRadar/issues/752) 提出的建议）
 - **环境变量支持**：AI 分析相关配置支持环境变量覆盖（`AI_API_KEY`、`AI_PROVIDER` 等）
 
 > 💡 详细配置教程见 [让 AI 帮我分析热点](#12-让-ai-帮我分析热点)
@@ -508,7 +508,7 @@
 > 📖 **详细配置教程**：[快速开始 - Bark 推送](#-快速开始)
 
 **🐛 Bug 修复**
-- 修复 `config.yaml` 中 `ntfy_server_url` 配置不生效的问题 ([#345](https://github.com/sansan0/TrendRadar/issues/345))
+- 修复 `config.yaml` 中 `ntfy_server_url` 配置不生效的问题 ([#345](https://github.com/damxin/TrendRadar/issues/345))
 
 **🔧 升级说明**：
 - **GitHub Fork 用户**：更新 `main.py`、`config/config.yaml`、`.github/workflows/crawler.yml`
@@ -623,7 +623,7 @@
 
 ### 2025/10/10 - v2.4.3
 
-> 感谢 [nidaye996](https://github.com/sansan0/TrendRadar/issues/98) 发现的体验问题
+> 感谢 [nidaye996](https://github.com/damxin/TrendRadar/issues/98) 发现的体验问题
 
 - **更新内容**：
     - 重构"静默推送模式"命名为"推送时间窗口控制"，提升功能理解度
@@ -665,7 +665,7 @@
 
 ### 2025/09/26 - v2.3.2
 
-- 修正了邮件通知配置检查被遗漏的问题（[#88](https://github.com/sansan0/TrendRadar/issues/88)）
+- 修正了邮件通知配置检查被遗漏的问题（[#88](https://github.com/damxin/TrendRadar/issues/88)）
 
 **修复说明**：
 - 解决了即使正确配置邮件通知，系统仍提示"未配置任何webhook"的问题
@@ -768,7 +768,7 @@
 ### 2025/06/21 - v1.2.1
 
 在本版本之前的旧版本，不仅 main.py 需要复制替换， crawler.yml 也需要你复制替换
-https://github.com/sansan0/TrendRadar/blob/master/.github/workflows/crawler.yml
+https://github.com/damxin/TrendRadar/blob/master/.github/workflows/crawler.yml
 
 ### 2025/06/19 - v1.2.0
 
@@ -1029,7 +1029,7 @@ ai_translation:
 
 ## 🚀 快速开始
 
-> **提醒**：建议先 **[查看最新官方文档](https://github.com/sansan0/TrendRadar?tab=readme-ov-file)**，确保配置步骤是最新的。
+> **提醒**：建议先 **[查看最新官方文档](https://github.com/damxin/TrendRadar?tab=readme-ov-file)**，确保配置步骤是最新的。
 
 ### 请选择适合你的部署方式
 
@@ -1051,7 +1051,7 @@ ai_translation:
 
    > ⚠️ 提醒：
    > - 后续文档中提到的 "Fork" 均可理解为 "Use this template"
-   > - 使用 Fork 可能导致运行异常，详见 [Issue #606](https://github.com/sansan0/TrendRadar/issues/606)
+   > - 使用 Fork 可能导致运行异常，详见 [Issue #606](https://github.com/damxin/TrendRadar/issues/606)
 
    <br>
 
@@ -1141,7 +1141,7 @@ ai_translation:
 
    有两个方案，**方案一**配置简单，**方案二**配置复杂(但是稳定推送)
 
-   其中方案一，由 **ziventian**发现并提供建议，在这里感谢他，默认是个人推送，也可以配置群组推送操作[#97](https://github.com/sansan0/TrendRadar/issues/97) ，
+   其中方案一，由 **ziventian**发现并提供建议，在这里感谢他，默认是个人推送，也可以配置群组推送操作[#97](https://github.com/damxin/TrendRadar/issues/97) ，
 
    **方案一：**
 
@@ -1342,14 +1342,14 @@ ai_translation:
    > **自动识别**：使用以上邮箱时，无需手动配置 `EMAIL_SMTP_SERVER` 和 `EMAIL_SMTP_PORT`，系统会自动识别。
    >
    > **反馈说明**：
-   > - 如果你使用**其他邮箱**测试成功，欢迎开 [Issues](https://github.com/sansan0/TrendRadar/issues) 告知，我会添加到支持列表
-   > - 如果上述邮箱配置有误或无法使用，也请开 [Issues](https://github.com/sansan0/TrendRadar/issues) 反馈，帮助改进项目
+   > - 如果你使用**其他邮箱**测试成功，欢迎开 [Issues](https://github.com/damxin/TrendRadar/issues) 告知，我会添加到支持列表
+   > - 如果上述邮箱配置有误或无法使用，也请开 [Issues](https://github.com/damxin/TrendRadar/issues) 反馈，帮助改进项目
    >
    > **特别感谢**：
-   > - 感谢 [@DYZYD](https://github.com/DYZYD) 贡献天翼邮箱（189.cn）配置并完成自发自收测试 ([#291](https://github.com/sansan0/TrendRadar/issues/291))
-   > - 感谢 [@longzhenren](https://github.com/longzhenren) 贡献阿里云邮箱（aliyun.com）配置并完成测试 ([#344](https://github.com/sansan0/TrendRadar/issues/344))
-   > - 感谢 [@ACANX](https://github.com/ACANX) 贡献 Yandex 邮箱（yandex.com）配置并完成测试 ([#663](https://github.com/sansan0/TrendRadar/issues/663))
-   > - 感谢 [@Sleepy-Tianhao](https://github.com/Sleepy-Tianhao) 贡献 iCloud 邮箱（icloud.com）配置并完成测试 ([#728](https://github.com/sansan0/TrendRadar/issues/728))
+   > - 感谢 [@DYZYD](https://github.com/DYZYD) 贡献天翼邮箱（189.cn）配置并完成自发自收测试 ([#291](https://github.com/damxin/TrendRadar/issues/291))
+   > - 感谢 [@longzhenren](https://github.com/longzhenren) 贡献阿里云邮箱（aliyun.com）配置并完成测试 ([#344](https://github.com/damxin/TrendRadar/issues/344))
+   > - 感谢 [@ACANX](https://github.com/ACANX) 贡献 Yandex 邮箱（yandex.com）配置并完成测试 ([#663](https://github.com/damxin/TrendRadar/issues/663))
+   > - 感谢 [@Sleepy-Tianhao](https://github.com/Sleepy-Tianhao) 贡献 iCloud 邮箱（icloud.com）配置并完成测试 ([#728](https://github.com/damxin/TrendRadar/issues/728))
 
    **常见邮箱设置：**
 
@@ -1738,13 +1738,13 @@ ai_translation:
    - **方法二**：直接访问 `https://github.com/你的用户名/TrendRadar/actions`
 
    **示例对比**：
-   - ❌ 作者的项目：`https://github.com/sansan0/TrendRadar/actions`
+   - ❌ 作者的项目：`https://github.com/damxin/TrendRadar/actions`
    - ✅ 你的项目：`https://github.com/你的用户名/TrendRadar/actions`
 
    **测试步骤**：
    1. 进入你项目的 Actions 页面
    2. 找到 **"Get Hot News"**(必须得是这个字)点进去，点击右侧的 **"Run workflow"** 按钮运行 
-      - 如果看不到该字样，参照 [#109](https://github.com/sansan0/TrendRadar/issues/109) 解决
+      - 如果看不到该字样，参照 [#109](https://github.com/damxin/TrendRadar/issues/109) 解决
    3. 3 分钟左右，消息会推送到你配置的平台
 
    <br>
@@ -1920,7 +1920,7 @@ platforms:
     # 添加更多平台...
 ```
 
-> 💡 **快捷方式**：如果不会看源代码，可以复制他人整理好的 [平台配置汇总](https://github.com/sansan0/TrendRadar/issues/95)
+> 💡 **快捷方式**：如果不会看源代码，可以复制他人整理好的 [平台配置汇总](https://github.com/damxin/TrendRadar/issues/95)
 
 > ⚠️ **注意**：平台不是越多越好，建议选择 10-15 个核心平台。过多平台会导致信息过载，反而降低使用体验。
 
@@ -2507,7 +2507,7 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
    **方式 1-A：使用 git clone（推荐，最简单）**
    ```bash
    # 克隆项目到本地
-   git clone https://github.com/sansan0/TrendRadar.git
+   git clone https://github.com/damxin/TrendRadar.git
    cd TrendRadar
    ```
 
@@ -2518,13 +2518,13 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
    cd trendradar
 
    # 下载配置文件模板
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/config.yaml -P config/
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequency_words.txt -P config/
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/ai_analysis_prompt.txt -P config/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/config.yaml -P config/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/frequency_words.txt -P config/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/ai_analysis_prompt.txt -P config/
 
    # 下载 docker compose 配置
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/.env  -P docker/
-   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/docker-compose.yml  -P docker/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/.env  -P docker/
+   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/docker-compose.yml  -P docker/
    ```
 
    > 💡 **说明**：Docker 部署需要的关键目录结构如下：
@@ -2623,7 +2623,7 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
 
 ```bash
 # 克隆项目
-git clone https://github.com/sansan0/TrendRadar.git
+git clone https://github.com/damxin/TrendRadar.git
 cd TrendRadar
 
 # 修改配置文件
@@ -3647,7 +3647,7 @@ MCP Inspector 是官方调试工具，用于测试 MCP 连接：
 - https://github.com/sansan0/bilibili-comment-analyzer
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=sansan0/TrendRadar&type=Date)](https://www.star-history.com/#sansan0/TrendRadar&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=damxin/TrendRadar&type=Date)](https://www.star-history.com/#damxin/TrendRadar&Date)
 
 <br>
 

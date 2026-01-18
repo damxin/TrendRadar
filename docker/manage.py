@@ -9,13 +9,107 @@ import sys
 import subprocess
 import time
 import signal
+import base64
 from pathlib import Path
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from functools import partial
+
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 # Web 服务器配置
 WEBSERVER_PORT = int(os.environ.get("WEBSERVER_PORT", "8080"))
 WEBSERVER_DIR = "/app/output"
 WEBSERVER_PID_FILE = "/tmp/webserver.pid"
+CONFIG_FILE = "/app/config/config.yaml"
 
+
+def load_auth_config():
+    """从 config.yaml 加载认证配置"""
+    if yaml is None:
+        print("  ⚠️ PyYAML 未安装，无法读取认证配置")
+        return {"enabled": False, "username": "", "password": ""}
+    
+    config_path = Path(CONFIG_FILE)
+    if not config_path.exists():
+        return {"enabled": False, "username": "", "password": ""}
+    
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+        
+        app_config = config.get("app", {})
+        auth_config = app_config.get("auth", {})
+        return {
+            "enabled": auth_config.get("enabled", False),
+            "username": auth_config.get("username", "admin"),
+            "password": auth_config.get("password", ""),
+        }
+    except Exception as e:
+        print(f"  ⚠️ 读取认证配置失败: {e}")
+        return {"enabled": False, "username": "", "password": ""}
+
+
+class AuthHandler(SimpleHTTPRequestHandler):
+    """带 HTTP Basic Auth 的请求处理器"""
+    
+    def __init__(self, *args, auth_config=None, **kwargs):
+        self.auth_config = auth_config or {"enabled": False}
+        super().__init__(*args, **kwargs)
+    
+    def do_HEAD(self):
+        if self._check_auth():
+            super().do_HEAD()
+    
+    def do_GET(self):
+        if self._check_auth():
+            super().do_GET()
+    
+    def _check_auth(self):
+        """检查认证"""
+        if not self.auth_config.get("enabled", False):
+            return True
+        
+        auth_header = self.headers.get("Authorization")
+        if auth_header is None:
+            self._send_auth_request()
+            return False
+        
+        try:
+            # 解析 Basic Auth
+            auth_type, auth_string = auth_header.split(" ", 1)
+            if auth_type.lower() != "basic":
+                self._send_auth_request()
+                return False
+            
+            decoded = base64.b64decode(auth_string).decode("utf-8")
+            username, password = decoded.split(":", 1)
+            
+            expected_username = self.auth_config.get("username", "")
+            expected_password = self.auth_config.get("password", "")
+            
+            if username == expected_username and password == expected_password:
+                return True
+            else:
+                self._send_auth_request()
+                return False
+        except Exception:
+            self._send_auth_request()
+            return False
+    
+    def _send_auth_request(self):
+        """发送 401 认证请求"""
+        self.send_response(401)
+        self.send_header("WWW-Authenticate", 'Basic realm="TrendRadar"')
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write("<!DOCTYPE html><html><head><meta charset='utf-8'><title>需要认证</title></head><body><h1>401 需要认证</h1><p>请输入用户名和密码访问此页面。</p></body></html>".encode("utf-8"))
+    
+    def log_message(self, format, *args):
+        """静默日志"""
+        pass
 
 def run_command(cmd, shell=True, capture_output=True):
     """执行系统命令"""
@@ -449,8 +543,16 @@ def restart_supercronic():
 
 def start_webserver():
     """启动 Web 服务器托管 output 目录"""
+    # 加载认证配置
+    auth_config = load_auth_config()
+    auth_enabled = auth_config.get("enabled", False)
+    
     print(f"🌐 启动 Web 服务器 (端口: {WEBSERVER_PORT})...")
-    print(f"  🔒 安全提示：仅提供静态文件访问，限制在 {WEBSERVER_DIR} 目录")
+    if auth_enabled:
+        print(f"  � 认证已启用，用户名: {auth_config.get('username', 'admin')}")
+    else:
+        print(f"  🔓 认证未启用（公开访问）")
+    print(f"  �🔒 安全提示：仅提供静态文件访问，限制在 {WEBSERVER_DIR} 目录")
 
     # 检查是否已经运行
     if Path(WEBSERVER_PID_FILE).exists():
@@ -479,31 +581,126 @@ def start_webserver():
         return
 
     try:
-        # 启动 HTTP 服务器
-        # 使用 --bind 绑定到 0.0.0.0 使容器内部可访问
-        # 工作目录限制在 WEBSERVER_DIR，防止访问其他目录
+        # 使用 fork 创建子进程运行服务器
+        pid = os.fork()
+        if pid == 0:
+            # 子进程：启动服务器
+            os.chdir(WEBSERVER_DIR)
+            os.setsid()  # 创建新会话
+            
+            # 创建带认证的处理器
+            handler = partial(AuthHandler, auth_config=auth_config, directory=WEBSERVER_DIR)
+            server = HTTPServer(("0.0.0.0", WEBSERVER_PORT), handler)
+            server.serve_forever()
+        else:
+            # 父进程：保存 PID 并退出
+            time.sleep(1)
+            
+            # 检查子进程是否还在运行
+            try:
+                os.kill(pid, 0)
+                # 保存 PID
+                with open(WEBSERVER_PID_FILE, 'w') as f:
+                    f.write(str(pid))
+
+                print(f"  ✅ Web 服务器已启动 (PID: {pid})")
+                print(f"  📁 服务目录: {WEBSERVER_DIR} (只读，仅静态文件)")
+                print(f"  🌐 访问地址: http://localhost:{WEBSERVER_PORT}")
+                print(f"  📄 首页: http://localhost:{WEBSERVER_PORT}/index.html")
+                print("  💡 停止服务: python manage.py stop_webserver")
+            except OSError:
+                print(f"  ❌ Web 服务器启动失败")
+    except AttributeError:
+        # Windows 不支持 fork，使用 subprocess 启动独立脚本
+        print("  ⚠️ 当前系统不支持 fork，使用 subprocess 方式启动...")
+        _start_webserver_subprocess(auth_config)
+    except Exception as e:
+        print(f"  ❌ 启动失败: {e}")
+
+
+def _start_webserver_subprocess(auth_config):
+    """Windows 兼容的 Web 服务器启动方式"""
+    # 创建临时启动脚本
+    script_content = f'''
+import os
+import sys
+import base64
+from pathlib import Path
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from functools import partial
+
+auth_config = {repr(auth_config)}
+
+class AuthHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, auth_config=None, **kwargs):
+        self.auth_config = auth_config or {{"enabled": False}}
+        super().__init__(*args, **kwargs)
+    
+    def do_HEAD(self):
+        if self._check_auth():
+            super().do_HEAD()
+    
+    def do_GET(self):
+        if self._check_auth():
+            super().do_GET()
+    
+    def _check_auth(self):
+        if not self.auth_config.get("enabled", False):
+            return True
+        auth_header = self.headers.get("Authorization")
+        if auth_header is None:
+            self._send_auth_request()
+            return False
+        try:
+            auth_type, auth_string = auth_header.split(" ", 1)
+            if auth_type.lower() != "basic":
+                self._send_auth_request()
+                return False
+            decoded = base64.b64decode(auth_string).decode("utf-8")
+            username, password = decoded.split(":", 1)
+            if username == self.auth_config.get("username", "") and password == self.auth_config.get("password", ""):
+                return True
+            self._send_auth_request()
+            return False
+        except Exception:
+            self._send_auth_request()
+            return False
+    
+    def _send_auth_request(self):
+        self.send_response(401)
+        self.send_header("WWW-Authenticate", 'Basic realm="TrendRadar"')
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"<h1>401 Unauthorized</h1>")
+    
+    def log_message(self, format, *args):
+        pass
+
+os.chdir("{WEBSERVER_DIR}")
+handler = partial(AuthHandler, auth_config=auth_config, directory="{WEBSERVER_DIR}")
+server = HTTPServer(("0.0.0.0", {WEBSERVER_PORT}), handler)
+server.serve_forever()
+'''
+    script_path = Path("/tmp/webserver_auth.py")
+    try:
+        with open(script_path, 'w', encoding='utf-8') as f:
+            f.write(script_content)
+        
         process = subprocess.Popen(
-            [sys.executable, '-m', 'http.server', str(WEBSERVER_PORT), '--bind', '0.0.0.0'],
-            cwd=WEBSERVER_DIR,
+            [sys.executable, str(script_path)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             start_new_session=True
         )
-
-        # 等待一下确保服务器启动
+        
         time.sleep(1)
-
-        # 检查进程是否还在运行
+        
         if process.poll() is None:
-            # 保存 PID
             with open(WEBSERVER_PID_FILE, 'w') as f:
                 f.write(str(process.pid))
-
             print(f"  ✅ Web 服务器已启动 (PID: {process.pid})")
-            print(f"  📁 服务目录: {WEBSERVER_DIR} (只读，仅静态文件)")
+            print(f"  📁 服务目录: {WEBSERVER_DIR}")
             print(f"  🌐 访问地址: http://localhost:{WEBSERVER_PORT}")
-            print(f"  📄 首页: http://localhost:{WEBSERVER_PORT}/index.html")
-            print("  💡 停止服务: python manage.py stop_webserver")
         else:
             print(f"  ❌ Web 服务器启动失败")
     except Exception as e:
