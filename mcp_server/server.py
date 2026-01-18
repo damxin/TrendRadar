@@ -3,10 +3,13 @@ TrendRadar MCP Server - FastMCP 2.0 实现
 
 使用 FastMCP 2.0 提供生产级 MCP 工具服务器。
 支持 stdio 和 HTTP 两种传输模式。
+支持 Bearer Token 认证（复用 config.yaml 中的 auth 配置）。
 """
 
 import asyncio
+import base64
 import json
+from pathlib import Path
 from typing import List, Optional, Dict, Union
 
 from fastmcp import FastMCP
@@ -21,8 +24,95 @@ from .utils.date_parser import DateParser
 from .utils.errors import MCPError
 
 
-# 创建 FastMCP 2.0 应用
-mcp = FastMCP('trendradar-news')
+# ==================== 认证配置 ====================
+
+def _load_mcp_auth_config() -> Dict:
+    """
+    从 config.yaml 加载 MCP 认证配置
+    
+    Returns:
+        包含 enabled, username, password 的字典
+    """
+    try:
+        import yaml
+    except ImportError:
+        return {"enabled": False, "username": "", "password": ""}
+    
+    # 尝试多个可能的配置文件路径
+    possible_paths = [
+        Path(__file__).parent.parent / "config" / "config.yaml",
+        Path.cwd() / "config" / "config.yaml",
+    ]
+    
+    for config_path in possible_paths:
+        if config_path.exists():
+            try:
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = yaml.safe_load(f)
+                
+                app_config = config.get("app", {})
+                auth_config = app_config.get("auth", {})
+                return {
+                    "enabled": auth_config.get("enabled", False),
+                    "username": auth_config.get("username", "admin"),
+                    "password": auth_config.get("password", ""),
+                }
+            except Exception:
+                continue
+    
+    return {"enabled": False, "username": "", "password": ""}
+
+
+def _create_auth_provider():
+    """
+    根据配置创建认证提供者
+    
+    Returns:
+        认证提供者实例，如果未启用认证则返回 None
+    """
+    auth_config = _load_mcp_auth_config()
+    
+    if not auth_config.get("enabled", False):
+        return None
+    
+    username = auth_config.get("username", "")
+    password = auth_config.get("password", "")
+    
+    if not username or not password:
+        print("[警告] 认证已启用但用户名或密码为空，跳过认证配置")
+        return None
+    
+    try:
+        from fastmcp.server.auth.providers.bearer import StaticBearerAuthProvider
+        
+        # 生成 token: username:password 的 Base64 编码
+        credentials = f"{username}:{password}"
+        token = base64.b64encode(credentials.encode()).decode()
+        
+        return StaticBearerAuthProvider(
+            tokens={token: {"client_id": username}}
+        )
+    except ImportError:
+        # 尝试使用其他认证提供者
+        try:
+            from fastmcp.server.auth.providers.jwt import StaticTokenVerifier
+            
+            credentials = f"{username}:{password}"
+            token = base64.b64encode(credentials.encode()).decode()
+            
+            return StaticTokenVerifier(
+                tokens={token: {"client_id": username, "scopes": ["mcp:access"]}}
+            )
+        except ImportError:
+            print("[警告] FastMCP 认证模块不可用，跳过认证配置")
+            return None
+
+
+# 加载认证配置并创建提供者
+_auth_provider = _create_auth_provider()
+
+# 创建 FastMCP 2.0 应用（带认证支持）
+mcp = FastMCP('trendradar-news', auth=_auth_provider)
 
 # 全局工具实例（在第一次请求时初始化）
 _tools_instances = {}
@@ -941,6 +1031,9 @@ def run_server(
     # 初始化工具实例
     _get_tools(project_root)
 
+    # 加载认证配置用于显示
+    auth_config = _load_mcp_auth_config()
+    
     # 打印启动信息
     print()
     print("=" * 60)
@@ -954,6 +1047,18 @@ def run_server(
     elif transport == 'http':
         print(f"  协议: MCP over HTTP (生产环境)")
         print(f"  服务器监听: {host}:{port}")
+        
+        # 显示认证状态
+        if auth_config.get("enabled"):
+            username = auth_config.get("username", "admin")
+            password = auth_config.get("password", "")
+            credentials = f"{username}:{password}"
+            token = base64.b64encode(credentials.encode()).decode()
+            print(f"  认证状态: 已启用")
+            print(f"  认证用户: {username}")
+            print(f"  Bearer Token: {token}")
+        else:
+            print("  认证状态: 未启用（公开访问）")
 
     if project_root:
         print(f"  项目目录: {project_root}")
