@@ -55,6 +55,7 @@ def _load_app_config(config_data: Dict) -> Dict:
     advanced = config_data.get("advanced", {})
     return {
         "VERSION_CHECK_URL": advanced.get("version_check_url", ""),
+        "CONFIGS_VERSION_CHECK_URL": advanced.get("configs_version_check_url", ""),
         "SHOW_VERSION_UPDATE": app_config.get("show_version_update", True),
         "TIMEZONE": _get_env_str("TIMEZONE") or app_config.get("timezone", "Asia/Shanghai"),
         "DEBUG": _get_env_bool("DEBUG") if _get_env_bool("DEBUG") is not None else advanced.get("debug", False),
@@ -217,19 +218,25 @@ def _load_display_config(config_data: Dict) -> Dict:
 
 
 def _load_ai_config(config_data: Dict) -> Dict:
-    """加载 AI 模型共享配置"""
+    """加载 AI 模型配置（LiteLLM 格式）"""
     ai_config = config_data.get("ai", {})
 
     timeout_env = _get_env_int_or_none("AI_TIMEOUT")
 
     return {
-        "PROVIDER": _get_env_str("AI_PROVIDER") or ai_config.get("provider", "deepseek"),
+        # LiteLLM 核心配置
+        "MODEL": _get_env_str("AI_MODEL") or ai_config.get("model", "deepseek/deepseek-chat"),
         "API_KEY": _get_env_str("AI_API_KEY") or ai_config.get("api_key", ""),
-        "MODEL": _get_env_str("AI_MODEL") or ai_config.get("model", "deepseek-chat"),
-        "BASE_URL": _get_env_str("AI_BASE_URL") or ai_config.get("base_url", ""),
-        "TIMEOUT": timeout_env if timeout_env is not None else ai_config.get("timeout", 90),
+        "API_BASE": _get_env_str("AI_API_BASE") or ai_config.get("api_base", ""),
+
+        # 生成参数
+        "TIMEOUT": timeout_env if timeout_env is not None else ai_config.get("timeout", 120),
         "TEMPERATURE": ai_config.get("temperature", 1.0),
         "MAX_TOKENS": ai_config.get("max_tokens", 5000),
+
+        # LiteLLM 高级选项
+        "NUM_RETRIES": ai_config.get("num_retries", 2),
+        "FALLBACK_MODELS": ai_config.get("fallback_models", []),
         "EXTRA_PARAMS": ai_config.get("extra_params", {}),
     }
 
@@ -237,16 +244,28 @@ def _load_ai_config(config_data: Dict) -> Dict:
 def _load_ai_analysis_config(config_data: Dict) -> Dict:
     """加载 AI 分析配置（功能配置，模型配置见 _load_ai_config）"""
     ai_config = config_data.get("ai_analysis", {})
+    analysis_window = ai_config.get("analysis_window", {})
 
     enabled_env = _get_env_bool("AI_ANALYSIS_ENABLED")
+    window_enabled_env = _get_env_bool("AI_ANALYSIS_WINDOW_ENABLED")
+    window_once_per_day_env = _get_env_bool("AI_ANALYSIS_WINDOW_ONCE_PER_DAY")
 
     return {
         "ENABLED": enabled_env if enabled_env is not None else ai_config.get("enabled", False),
         "LANGUAGE": ai_config.get("language", "Chinese"),
         "PROMPT_FILE": ai_config.get("prompt_file", "ai_analysis_prompt.txt"),
+        "MODE": ai_config.get("mode", "follow_report"),
         "MAX_NEWS_FOR_ANALYSIS": ai_config.get("max_news_for_analysis", 50),
         "INCLUDE_RSS": ai_config.get("include_rss", True),
         "INCLUDE_RANK_TIMELINE": ai_config.get("include_rank_timeline", False),
+        "ANALYSIS_WINDOW": {
+            "ENABLED": window_enabled_env if window_enabled_env is not None else analysis_window.get("enabled", False),
+            "TIME_RANGE": {
+                "START": _get_env_str("AI_ANALYSIS_WINDOW_START") or analysis_window.get("start", "09:00"),
+                "END": _get_env_str("AI_ANALYSIS_WINDOW_END") or analysis_window.get("end", "22:00"),
+            },
+            "ONCE_PER_DAY": window_once_per_day_env if window_once_per_day_env is not None else analysis_window.get("once_per_day", False),
+        },
     }
 
 

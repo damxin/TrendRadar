@@ -90,6 +90,9 @@ CREATE TABLE IF NOT EXISTS push_records (
     pushed INTEGER DEFAULT 0,
     push_time TEXT,
     report_type TEXT,
+    ai_analyzed INTEGER DEFAULT 0,
+    ai_analysis_time TEXT,
+    ai_analysis_mode TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

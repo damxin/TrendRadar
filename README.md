@@ -1,6 +1,6 @@
 <div align="center" id="trendradar">
 
-<a href="https://github.com/damxin/TrendRadar" title="TrendRadar">
+<a href="https://github.com/sansan0/TrendRadar" title="TrendRadar">
   <img src="/_image/banner.webp" alt="TrendRadar Banner" width="80%">
 </a>
 
@@ -10,13 +10,13 @@
 
 <a href="https://shandianshuo.cn" target="_blank" title="AI 语音输入，比打字快 4 倍 ⚡"><img src="_image/shandianshuo.png" alt="闪电说 logo" height="50"/></a>
 
-[![GitHub Stars](https://img.shields.io/github/stars/damxin/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/damxin/TrendRadar/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/damxin/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/damxin/TrendRadar/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/sansan0/TrendRadar?style=flat-square&logo=github&color=yellow)](https://github.com/sansan0/TrendRadar/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/sansan0/TrendRadar?style=flat-square&logo=github&color=blue)](https://github.com/sansan0/TrendRadar/network/members)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v5.2.0-blue.svg)](https://github.com/damxin/TrendRadar)
-[![MCP](https://img.shields.io/badge/MCP-v3.1.6-green.svg)](https://github.com/damxin/TrendRadar)
-[![RSS](https://img.shields.io/badge/RSS-订阅源支持-orange.svg?style=flat-square&logo=rss&logoColor=white)](https://github.com/damxin/TrendRadar)
-[![AI翻译](https://img.shields.io/badge/AI-多语言推送-purple.svg?style=flat-square)](https://github.com/damxin/TrendRadar)
+[![Version](https://img.shields.io/badge/version-v5.4.0-blue.svg)](https://github.com/sansan0/TrendRadar)
+[![MCP](https://img.shields.io/badge/MCP-v3.1.7-green.svg)](https://github.com/sansan0/TrendRadar)
+[![RSS](https://img.shields.io/badge/RSS-订阅源支持-orange.svg?style=flat-square&logo=rss&logoColor=white)](https://github.com/sansan0/TrendRadar)
+[![AI翻译](https://img.shields.io/badge/AI-多语言推送-purple.svg?style=flat-square)](https://github.com/sansan0/TrendRadar)
 
 [![企业微信通知](https://img.shields.io/badge/企业微信-通知-00D4AA?style=flat-square)](https://work.weixin.qq.com/)
 [![个人微信通知](https://img.shields.io/badge/个人微信-通知-00D4AA?style=flat-square)](https://weixin.qq.com/)
@@ -30,7 +30,7 @@
 [![通用Webhook](https://img.shields.io/badge/通用-Webhook-607D8B?style=flat-square&logo=webhook&logoColor=white)](#)
 
 
-[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-自动化-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/damxin/TrendRadar)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-自动化-2088FF?style=flat-square&logo=github-actions&logoColor=white)](https://github.com/sansan0/TrendRadar)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-部署-4285F4?style=flat-square&logo=github&logoColor=white)](https://sansan0.github.io/TrendRadar)
 [![Docker](https://img.shields.io/badge/Docker-部署-2496ED?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/r/wantcat/trendradar)
 [![MCP Support](https://img.shields.io/badge/MCP-AI分析支持-FF6B6B?style=flat-square&logo=ai&logoColor=white)](https://modelcontextprotocol.io/)
@@ -205,8 +205,8 @@
 
 
 - **GitHub Issues**：适合针对性强的解答。提问时请提供完整信息（截图、错误日志、系统环境等）。
-- **公众号交流**：适合快速咨询。建议优先在相关文章下的公共留言区交流，如私信，请文明礼貌用语😉
-- **联系方式**：path@linux.do
+- **公众号交流**：建议优先在相关文章下的公共留言区交流。若需提问，欢迎先点赞、推荐或分享文章表达支持，我在后台都能感受到这份心意哟 (´▽`ʃ♡ƪ)。
+  <br>*(友情提示：本项目为免费开源分享，非商业服务。遇到部署问题请先查阅文档，提问请保持耐心与礼貌。对于将开源作者视为客服或带有情绪的指责，恕难回应，感谢理解。此外，文档倾注了大量心血，强烈建议优先阅读 [**🚀 快速开始**](#-快速开始) 章节，绝大多数部署问题都能从中找到答案。)*
 
 
 |公众号关注 |微信点赞 | 支付宝点赞 |
@@ -217,8 +217,50 @@
 
 ## 📝 更新日志
 
-> **📌 查看最新更新**：**[原仓库更新日志](https://github.com/damxin/TrendRadar?tab=readme-ov-file#-更新日志)** ：
+> **📌 查看最新更新**：**[原仓库更新日志](https://github.com/sansan0/TrendRadar?tab=readme-ov-file#-更新日志)** ：
 - **提示**：建议查看【历史更新】，明确具体的【功能内容】
+
+
+### 2026/01/23 - v5.4.0
+
+- 增加 AI 分析模式的独立控制功能，可选 follow_report | daily | current | incremental 
+- 新增 AI 分析时间窗口控制，支持自定义运行段及每日频次限制
+- 增加配置文件版本管理功能
+- 修复若干bug
+
+
+### 2026/01/10 - mcp-v3.0.0~v3.1.5
+
+- **Breaking Change**：所有工具返回值统一为 `{success, summary, data, error}` 结构
+- **异步一致性**：所有 21 个工具函数使用 `asyncio.to_thread()` 包装同步调用
+- **MCP Resources**：新增 4 个资源（platforms、rss-feeds、available-dates、keywords）
+- **RSS 增强**：`get_latest_rss` 支持多日查询（days 参数），跨日期 URL 去重
+- **正则匹配修复**：`get_trending_topics` 支持 `/pattern/` 正则语法和 `display_name`
+- **缓存优化**：新增 `make_cache_key()` 函数，参数排序+MD5 哈希确保一致性
+- **新增 check_version 工具**：支持同时检查 TrendRadar 和 MCP Server 版本更新
+
+
+<details>
+<summary>👉 点击展开：<strong>历史更新</strong></summary>
+
+
+### 2026/01/19 - v5.3.0
+
+> **重大重构：AI 模块迁移至 LiteLLM**
+
+- **统一 AI 接口**：使用 LiteLLM 替代手动实现，支持 100+ AI 提供商
+- **简化配置**：移除 `provider` 字段，改用 `model: "provider/model_name"` 格式
+- **新增功能**：自动重试 (`num_retries`)、备用模型 (`fallback_models`)
+- **配置变更**：
+  - `ai.provider` → 移除（已合并到 model）
+  - `ai.base_url` → `ai.api_base`
+  - `AI_PROVIDER` 环境变量 → 移除
+  - `AI_BASE_URL` 环境变量 → `AI_API_BASE`
+- **模型格式示例**：
+  - DeepSeek: `deepseek/deepseek-chat`
+  - OpenAI: `openai/gpt-4o`
+  - Gemini: `gemini/gemini-2.5-flash`
+  - Anthropic: `anthropic/claude-3-5-sonnet`
 
 ### 2026/01/17 - v5.2.0
 
@@ -252,22 +294,6 @@
 
 - 修复若干已知问题，提升系统稳定性
 
-
-### 2026/01/10 - mcp-v3.0.0~v3.1.5
-
-- **Breaking Change**：所有工具返回值统一为 `{success, summary, data, error}` 结构
-- **异步一致性**：所有 21 个工具函数使用 `asyncio.to_thread()` 包装同步调用
-- **MCP Resources**：新增 4 个资源（platforms、rss-feeds、available-dates、keywords）
-- **RSS 增强**：`get_latest_rss` 支持多日查询（days 参数），跨日期 URL 去重
-- **正则匹配修复**：`get_trending_topics` 支持 `/pattern/` 正则语法和 `display_name`
-- **缓存优化**：新增 `make_cache_key()` 函数，参数排序+MD5 哈希确保一致性
-- **新增 check_version 工具**：支持同时检查 TrendRadar 和 MCP Server 版本更新
-
-
-<details>
-<summary>👉 点击展开：<strong>历史更新</strong></summary>
-
-
 ### 2026/01/10 - v5.0.0
 
 > **开发小插曲**：
@@ -277,8 +303,8 @@
 
 本次更新对推送消息进行了区域化重构，现在推送内容清晰地划分为五大核心板块：
 
-1.  **📊 热榜新闻**：根据您的关键词精准筛选后的全网热点聚合。
-2.  **📰 RSS 订阅**：您的个性化订阅源内容，支持按关键词分组。
+1.  **📊 热榜新闻**：根据你的关键词精准筛选后的全网热点聚合。
+2.  **📰 RSS 订阅**：你的个性化订阅源内容，支持按关键词分组。
 3.  **🆕 本次新增**：实时捕捉自上次运行以来的全新热点（带 🆕 标记）。
 4.  **📋 独立展示区**：指定平台的完整热榜或 RSS 源展示，**完全不受关键词过滤限制**。
 5.  **✨ AI 分析板块**：由 AI 驱动的深度洞察，包含趋势概述、热度走势及**极其重要**的情感倾向分析。
@@ -307,7 +333,7 @@
 
 **🔧 配置优化**
 
-- **频率词配置增强**：新增 `[组别名]` 语法，支持 `#` 注释行，配置更清晰（感谢 [@songge8](https://github.com/damxin/TrendRadar/issues/752) 提出的建议）
+- **频率词配置增强**：新增 `[组别名]` 语法，支持 `#` 注释行，配置更清晰（感谢 [@songge8](https://github.com/sansan0/TrendRadar/issues/752) 提出的建议）
 - **环境变量支持**：AI 分析相关配置支持环境变量覆盖（`AI_API_KEY`、`AI_PROVIDER` 等）
 
 > 💡 详细配置教程见 [让 AI 帮我分析热点](#12-让-ai-帮我分析热点)
@@ -508,7 +534,7 @@
 > 📖 **详细配置教程**：[快速开始 - Bark 推送](#-快速开始)
 
 **🐛 Bug 修复**
-- 修复 `config.yaml` 中 `ntfy_server_url` 配置不生效的问题 ([#345](https://github.com/damxin/TrendRadar/issues/345))
+- 修复 `config.yaml` 中 `ntfy_server_url` 配置不生效的问题 ([#345](https://github.com/sansan0/TrendRadar/issues/345))
 
 **🔧 升级说明**：
 - **GitHub Fork 用户**：更新 `main.py`、`config/config.yaml`、`.github/workflows/crawler.yml`
@@ -623,7 +649,7 @@
 
 ### 2025/10/10 - v2.4.3
 
-> 感谢 [nidaye996](https://github.com/damxin/TrendRadar/issues/98) 发现的体验问题
+> 感谢 [nidaye996](https://github.com/sansan0/TrendRadar/issues/98) 发现的体验问题
 
 - **更新内容**：
     - 重构"静默推送模式"命名为"推送时间窗口控制"，提升功能理解度
@@ -665,7 +691,7 @@
 
 ### 2025/09/26 - v2.3.2
 
-- 修正了邮件通知配置检查被遗漏的问题（[#88](https://github.com/damxin/TrendRadar/issues/88)）
+- 修正了邮件通知配置检查被遗漏的问题（[#88](https://github.com/sansan0/TrendRadar/issues/88)）
 
 **修复说明**：
 - 解决了即使正确配置邮件通知，系统仍提示"未配置任何webhook"的问题
@@ -768,7 +794,7 @@
 ### 2025/06/21 - v1.2.1
 
 在本版本之前的旧版本，不仅 main.py 需要复制替换， crawler.yml 也需要你复制替换
-https://github.com/damxin/TrendRadar/blob/master/.github/workflows/crawler.yml
+https://github.com/sansan0/TrendRadar/blob/master/.github/workflows/crawler.yml
 
 ### 2025/06/19 - v1.2.0
 
@@ -1029,7 +1055,7 @@ ai_translation:
 
 ## 🚀 快速开始
 
-> **提醒**：建议先 **[查看最新官方文档](https://github.com/damxin/TrendRadar?tab=readme-ov-file)**，确保配置步骤是最新的。
+> **提醒**：建议先 **[查看最新官方文档](https://github.com/sansan0/TrendRadar?tab=readme-ov-file)**，确保配置步骤是最新的。
 
 ### 请选择适合你的部署方式
 
@@ -1051,7 +1077,7 @@ ai_translation:
 
    > ⚠️ 提醒：
    > - 后续文档中提到的 "Fork" 均可理解为 "Use this template"
-   > - 使用 Fork 可能导致运行异常，详见 [Issue #606](https://github.com/damxin/TrendRadar/issues/606)
+   > - 使用 Fork 可能导致运行异常，详见 [Issue #606](https://github.com/sansan0/TrendRadar/issues/606)
 
    <br>
 
@@ -1141,7 +1167,7 @@ ai_translation:
 
    有两个方案，**方案一**配置简单，**方案二**配置复杂(但是稳定推送)
 
-   其中方案一，由 **ziventian**发现并提供建议，在这里感谢他，默认是个人推送，也可以配置群组推送操作[#97](https://github.com/damxin/TrendRadar/issues/97) ，
+   其中方案一，由 **ziventian**发现并提供建议，在这里感谢他，默认是个人推送，也可以配置群组推送操作[#97](https://github.com/sansan0/TrendRadar/issues/97) ，
 
    **方案一：**
 
@@ -1342,14 +1368,14 @@ ai_translation:
    > **自动识别**：使用以上邮箱时，无需手动配置 `EMAIL_SMTP_SERVER` 和 `EMAIL_SMTP_PORT`，系统会自动识别。
    >
    > **反馈说明**：
-   > - 如果你使用**其他邮箱**测试成功，欢迎开 [Issues](https://github.com/damxin/TrendRadar/issues) 告知，我会添加到支持列表
-   > - 如果上述邮箱配置有误或无法使用，也请开 [Issues](https://github.com/damxin/TrendRadar/issues) 反馈，帮助改进项目
+   > - 如果你使用**其他邮箱**测试成功，欢迎开 [Issues](https://github.com/sansan0/TrendRadar/issues) 告知，我会添加到支持列表
+   > - 如果上述邮箱配置有误或无法使用，也请开 [Issues](https://github.com/sansan0/TrendRadar/issues) 反馈，帮助改进项目
    >
    > **特别感谢**：
-   > - 感谢 [@DYZYD](https://github.com/DYZYD) 贡献天翼邮箱（189.cn）配置并完成自发自收测试 ([#291](https://github.com/damxin/TrendRadar/issues/291))
-   > - 感谢 [@longzhenren](https://github.com/longzhenren) 贡献阿里云邮箱（aliyun.com）配置并完成测试 ([#344](https://github.com/damxin/TrendRadar/issues/344))
-   > - 感谢 [@ACANX](https://github.com/ACANX) 贡献 Yandex 邮箱（yandex.com）配置并完成测试 ([#663](https://github.com/damxin/TrendRadar/issues/663))
-   > - 感谢 [@Sleepy-Tianhao](https://github.com/Sleepy-Tianhao) 贡献 iCloud 邮箱（icloud.com）配置并完成测试 ([#728](https://github.com/damxin/TrendRadar/issues/728))
+   > - 感谢 [@DYZYD](https://github.com/DYZYD) 贡献天翼邮箱（189.cn）配置并完成自发自收测试 ([#291](https://github.com/sansan0/TrendRadar/issues/291))
+   > - 感谢 [@longzhenren](https://github.com/longzhenren) 贡献阿里云邮箱（aliyun.com）配置并完成测试 ([#344](https://github.com/sansan0/TrendRadar/issues/344))
+   > - 感谢 [@ACANX](https://github.com/ACANX) 贡献 Yandex 邮箱（yandex.com）配置并完成测试 ([#663](https://github.com/sansan0/TrendRadar/issues/663))
+   > - 感谢 [@Sleepy-Tianhao](https://github.com/Sleepy-Tianhao) 贡献 iCloud 邮箱（icloud.com）配置并完成测试 ([#728](https://github.com/sansan0/TrendRadar/issues/728))
 
    **常见邮箱设置：**
 
@@ -1738,13 +1764,13 @@ ai_translation:
    - **方法二**：直接访问 `https://github.com/你的用户名/TrendRadar/actions`
 
    **示例对比**：
-   - ❌ 作者的项目：`https://github.com/damxin/TrendRadar/actions`
+   - ❌ 作者的项目：`https://github.com/sansan0/TrendRadar/actions`
    - ✅ 你的项目：`https://github.com/你的用户名/TrendRadar/actions`
 
    **测试步骤**：
    1. 进入你项目的 Actions 页面
    2. 找到 **"Get Hot News"**(必须得是这个字)点进去，点击右侧的 **"Run workflow"** 按钮运行 
-      - 如果看不到该字样，参照 [#109](https://github.com/damxin/TrendRadar/issues/109) 解决
+      - 如果看不到该字样，参照 [#109](https://github.com/sansan0/TrendRadar/issues/109) 解决
    3. 3 分钟左右，消息会推送到你配置的平台
 
    <br>
@@ -1920,7 +1946,7 @@ platforms:
     # 添加更多平台...
 ```
 
-> 💡 **快捷方式**：如果不会看源代码，可以复制他人整理好的 [平台配置汇总](https://github.com/damxin/TrendRadar/issues/95)
+> 💡 **快捷方式**：如果不会看源代码，可以复制他人整理好的 [平台配置汇总](https://github.com/sansan0/TrendRadar/issues/95)
 
 > ⚠️ **注意**：平台不是越多越好，建议选择 10-15 个核心平台。过多平台会导致信息过载，反而降低使用体验。
 
@@ -2507,7 +2533,7 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
    **方式 1-A：使用 git clone（推荐，最简单）**
    ```bash
    # 克隆项目到本地
-   git clone https://github.com/damxin/TrendRadar.git
+   git clone https://github.com/sansan0/TrendRadar.git
    cd TrendRadar
    ```
 
@@ -2518,13 +2544,13 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
    cd trendradar
 
    # 下载配置文件模板
-   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/config.yaml -P config/
-   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/frequency_words.txt -P config/
-   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/config/ai_analysis_prompt.txt -P config/
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/config.yaml -P config/
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequency_words.txt -P config/
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/ai_analysis_prompt.txt -P config/
 
    # 下载 docker compose 配置
-   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/.env  -P docker/
-   wget https://raw.githubusercontent.com/damxin/TrendRadar/master/docker/docker-compose.yml  -P docker/
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/.env  -P docker/
+   wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/docker/docker-compose.yml  -P docker/
    ```
 
    > 💡 **说明**：Docker 部署需要的关键目录结构如下：
@@ -2623,7 +2649,7 @@ TrendRadar 提供两个独立的 Docker 镜像，可根据需求选择部署：
 
 ```bash
 # 克隆项目
-git clone https://github.com/damxin/TrendRadar.git
+git clone https://github.com/sansan0/TrendRadar.git
 cd TrendRadar
 
 # 修改配置文件
@@ -3227,19 +3253,28 @@ app:
 |-------|-------|------|
 | `AI_ANALYSIS_ENABLED` | `true` | 开启开关 |
 | `AI_API_KEY` | `sk-xxxxxx` | 你的 API Key |
-| `AI_PROVIDER` | `deepseek` | AI 提供商（见下表） |
-| `AI_MODEL` | `deepseek-chat` | 模型名称 |
+| `AI_MODEL` | `deepseek/deepseek-chat` | 模型标识（格式：`provider/model`） |
 
-**支持的 AI 提供商**：
+**支持的 AI 提供商**（基于 LiteLLM，支持 100+ 提供商）：
 
-| 提供商 | AI_PROVIDER 填什么 | 默认模型 (AI_MODEL) |
-|-------|-------------------|-------------------|
-| **DeepSeek** (推荐) | `deepseek` | `deepseek-chat` |
-| **OpenAI** | `openai` | `gpt-4o` |
-| **Google Gemini** | `gemini` | `gemini-1.5-flash` |
-| **自定义** (OneAPI) | `custom` | 需额外配置 `AI_BASE_URL` |
+| 提供商 | AI_MODEL 填什么 | 说明 |
+|-------|----------------|------|
+| **DeepSeek** (推荐) | `deepseek/deepseek-chat` | 性价比极高，适合高频分析 |
+| **OpenAI** | `openai/gpt-4o`<br>`openai/gpt-4o-mini` | GPT-4o 系列 |
+| **Google Gemini** | `gemini/gemini-1.5-flash`<br>`gemini/gemini-1.5-pro` | Gemini 系列 |
+| **自定义 API** | 任意格式 | 配合 `AI_API_BASE` 使用 |
 
-> 💡 **小技巧**：DeepSeek 性价比极高，非常适合用来做这种高频的新闻分析。
+> 💡 **新特性**：现已基于 [LiteLLM](https://github.com/BerriAI/litellm) 统一接口，支持 100+ AI 提供商，配置更简单、错误处理更完善。
+
+**可选配置项**：
+
+| 变量名 | 默认值 | 说明 |
+|-------|-------|------|
+| `AI_API_BASE` | (自动) | 自定义 API 地址（如 OneAPI、本地模型） |
+| `AI_TEMPERATURE` | `1.0` | 采样温度（0-2，越高越随机） |
+| `AI_MAX_TOKENS` | `5000` | 最大生成 token 数 |
+| `AI_TIMEOUT` | `120` | 请求超时时间（秒） |
+| `AI_NUM_RETRIES` | `2` | 失败重试次数 |
 
 #### 进阶玩法：AI 翻译
 
@@ -3647,7 +3682,7 @@ MCP Inspector 是官方调试工具，用于测试 MCP 连接：
 - https://github.com/sansan0/bilibili-comment-analyzer
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=damxin/TrendRadar&type=Date)](https://www.star-history.com/#damxin/TrendRadar&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=sansan0/TrendRadar&type=Date)](https://www.star-history.com/#sansan0/TrendRadar&Date)
 
 <br>
 
