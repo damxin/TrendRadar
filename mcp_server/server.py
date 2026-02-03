@@ -3,13 +3,10 @@ TrendRadar MCP Server - FastMCP 2.0 实现
 
 使用 FastMCP 2.0 提供生产级 MCP 工具服务器。
 支持 stdio 和 HTTP 两种传输模式。
-支持 Bearer Token 认证（复用 config.yaml 中的 auth 配置）。
 """
 
 import asyncio
-import base64
 import json
-from pathlib import Path
 from typing import List, Optional, Dict, Union
 
 from fastmcp import FastMCP
@@ -20,99 +17,13 @@ from .tools.search_tools import SearchTools
 from .tools.config_mgmt import ConfigManagementTools
 from .tools.system import SystemManagementTools
 from .tools.storage_sync import StorageSyncTools
+from .tools.article_reader import ArticleReaderTools
 from .utils.date_parser import DateParser
 from .utils.errors import MCPError
 
 
-# ==================== 认证配置 ====================
-
-def _load_mcp_auth_config() -> Dict:
-    """
-    从 config.yaml 加载 MCP 认证配置
-    
-    Returns:
-        包含 enabled, username, password 的字典
-    """
-    try:
-        import yaml
-    except ImportError:
-        return {"enabled": False, "username": "", "password": ""}
-    
-    # 尝试多个可能的配置文件路径
-    possible_paths = [
-        Path(__file__).parent.parent / "config" / "config.yaml",
-        Path.cwd() / "config" / "config.yaml",
-    ]
-    
-    for config_path in possible_paths:
-        if config_path.exists():
-            try:
-                with open(config_path, 'r', encoding='utf-8') as f:
-                    config = yaml.safe_load(f)
-                
-                app_config = config.get("app", {})
-                auth_config = app_config.get("auth", {})
-                return {
-                    "enabled": auth_config.get("enabled", False),
-                    "username": auth_config.get("username", "admin"),
-                    "password": auth_config.get("password", ""),
-                }
-            except Exception:
-                continue
-    
-    return {"enabled": False, "username": "", "password": ""}
-
-
-def _create_auth_provider():
-    """
-    根据配置创建认证提供者
-    
-    Returns:
-        认证提供者实例，如果未启用认证则返回 None
-    """
-    auth_config = _load_mcp_auth_config()
-    
-    if not auth_config.get("enabled", False):
-        return None
-    
-    username = auth_config.get("username", "")
-    password = auth_config.get("password", "")
-    
-    if not username or not password:
-        print("[警告] 认证已启用但用户名或密码为空，跳过认证配置")
-        return None
-    
-    try:
-        from fastmcp.server.auth.providers.bearer import StaticBearerAuthProvider
-        
-        # 生成 token: username:password 的 Base64 编码
-        credentials = f"{username}:{password}"
-        token = base64.b64encode(credentials.encode()).decode()
-        
-        return StaticBearerAuthProvider(
-            tokens={token: {"client_id": username}}
-        )
-    except ImportError:
-        # 尝试使用其他认证提供者
-        try:
-            from fastmcp.server.auth.providers.jwt import StaticTokenVerifier
-            
-            credentials = f"{username}:{password}"
-            token = base64.b64encode(credentials.encode()).decode()
-            
-            return StaticTokenVerifier(
-                tokens={token: {"client_id": username, "scopes": ["mcp:access"]}}
-            )
-        except ImportError:
-            print("[警告] FastMCP 认证模块不可用，跳过认证配置")
-            return None
-
-
-# 加载认证配置并创建提供者
-_auth_provider = _create_auth_provider()
-
-# 创建 FastMCP 2.0 应用（带认证支持）
-mcp = FastMCP('trendradar-news', auth=_auth_provider)
+# 创建 FastMCP 2.0 应用
+mcp = FastMCP('trendradar-news')
 
 # 全局工具实例（在第一次请求时初始化）
 _tools_instances = {}
@@ -127,6 +38,7 @@ def _get_tools(project_root: Optional[str] = None):
         _tools_instances['config'] = ConfigManagementTools(project_root)
         _tools_instances['system'] = SystemManagementTools(project_root)
         _tools_instances['storage'] = StorageSyncTools(project_root)
+        _tools_instances['article'] = ArticleReaderTools(project_root)
     return _tools_instances
 
 
@@ -1011,6 +923,87 @@ async def list_available_dates(
     return json.dumps(result, ensure_ascii=False, indent=2)
 
 
+# ==================== 文章内容读取工具 ====================
+
+@mcp.tool
+async def read_article(
+    url: str,
+    timeout: int = 30
+) -> str:
+    """
+    读取指定 URL 的文章内容，返回 LLM 友好的 Markdown 格式
+
+    通过 Jina AI Reader 将网页转换为干净的 Markdown，自动去除广告、导航栏等噪音内容。
+    适合用于：阅读新闻正文、获取文章详情、分析文章内容。
+
+    **典型使用流程：**
+    1. 先用 search_news(include_url=True) 搜索新闻获取链接
+    2. 再用 read_article(url=链接) 读取正文内容
+    3. AI 对 Markdown 正文进行分析、摘要、翻译等
+
+    Args:
+        url: 文章链接（必需），以 http:// 或 https:// 开头
+        timeout: 请求超时时间（秒），默认 30，最大 60
+
+    Returns:
+        JSON格式的文章内容，包含完整 Markdown 正文
+
+    Examples:
+        - read_article(url="https://example.com/news/123")
+
+    Note:
+        - 使用 Jina AI Reader 免费服务（100 RPM 限制）
+        - 每次请求间隔 5 秒（内置速率控制）
+        - 部分付费墙/登录墙页面可能无法完整获取
+    """
+    tools = _get_tools()
+    timeout = min(max(timeout, 10), 60)
+    result = await asyncio.to_thread(
+        tools['article'].read_article,
+        url=url, timeout=timeout
+    )
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
+@mcp.tool
+async def read_articles_batch(
+    urls: List[str],
+    timeout: int = 30
+) -> str:
+    """
+    批量读取多篇文章内容（最多 5 篇，间隔 5 秒）
+
+    逐篇请求文章内容，每篇之间自动间隔 5 秒以遵守速率限制。
+
+    **典型使用流程：**
+    1. 先用 search_news(include_url=True) 搜索新闻获取多个链接
+    2. 再用 read_articles_batch(urls=[...]) 批量读取正文
+    3. AI 对多篇文章进行对比分析、综合报告
+
+    Args:
+        urls: 文章链接列表（必需），最多处理 5 篇
+        timeout: 每篇的请求超时时间（秒），默认 30
+
+    Returns:
+        JSON格式的批量读取结果，包含每篇的完整内容和状态
+
+    Examples:
+        - read_articles_batch(urls=["https://a.com/1", "https://b.com/2"])
+
+    Note:
+        - 单次最多读取 5 篇，超出部分会被跳过
+        - 5 篇约需 25-30 秒（每篇间隔 5 秒）
+        - 单篇失败不影响其他篇的读取
+    """
+    tools = _get_tools()
+    timeout = min(max(timeout, 10), 60)
+    result = await asyncio.to_thread(
+        tools['article'].read_articles_batch,
+        urls=urls, timeout=timeout
+    )
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
 # ==================== 启动入口 ====================
 
 def run_server(
@@ -1031,9 +1024,6 @@ def run_server(
     # 初始化工具实例
     _get_tools(project_root)
 
-    # 加载认证配置用于显示
-    auth_config = _load_mcp_auth_config()
-    
     # 打印启动信息
     print()
     print("=" * 60)
@@ -1047,18 +1037,6 @@ def run_server(
     elif transport == 'http':
         print(f"  协议: MCP over HTTP (生产环境)")
         print(f"  服务器监听: {host}:{port}")
-        
-        # 显示认证状态
-        if auth_config.get("enabled"):
-            username = auth_config.get("username", "admin")
-            password = auth_config.get("password", "")
-            credentials = f"{username}:{password}"
-            token = base64.b64encode(credentials.encode()).decode()
-            print(f"  认证状态: 已启用")
-            print(f"  认证用户: {username}")
-            print(f"  Bearer Token: {token}")
-        else:
-            print("  认证状态: 未启用（公开访问）")
 
     if project_root:
         print(f"  项目目录: {project_root}")
@@ -1102,6 +1080,10 @@ def run_server(
     print("    19. sync_from_remote        - 从远程存储拉取数据到本地")
     print("    20. get_storage_status      - 获取存储配置和状态")
     print("    21. list_available_dates    - 列出本地/远程可用日期")
+    print()
+    print("    === 文章内容读取 ===")
+    print("    22. read_article            - 读取单篇文章内容（Markdown格式）")
+    print("    23. read_articles_batch     - 批量读取多篇文章（自动限速）")
     print("=" * 60)
     print()
 

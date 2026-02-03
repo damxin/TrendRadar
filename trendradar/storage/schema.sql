@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS crawl_source_status (
 -- ============================================
 -- 推送记录表
 -- 用于 push_window once_per_day 功能
+-- 以及 ai_analysis analysis_window once_per_day 功能
 -- ============================================
 CREATE TABLE IF NOT EXISTS push_records (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
